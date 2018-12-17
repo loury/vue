@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.js"></script>
+    <title>v-if</title>
+</head>
+<body>
+    <div id="vIf">
+        <div v-if="1<2">v-if为true</div>
+        <div v-else-if="3>2">v-if为false，v-else-if为true</div>
+        <div v-else>v-if和v-else-if都为false</div>
+
+        <template v-if="1<2">
+            <div>组员1</div>
+            <div>组员2</div>
+        </template>
+
+        <template v-if="loginType === 'username'">
+                <label>Username</label>
+                <input placeholder="用户名" key="username-input">
+              </template>
+              <template v-else>
+                <label>Email</label>
+                <input placeholder="邮箱" key="email-input">
+        </template>
+        <input type="button" value="点击切换输入类型" v-on:click="toggleLoginType">
+
+    </div>
+</body>
+<script>
+    var vIf = new Vue({
+        el:"#vIf",
+        data:{
+            loginType:"username"
+        },
+        methods:{
+            toggleLoginType:function(){
+                if(this.loginType=="username"){
+                    this.loginType="email";
+                }else{
+                    this.loginType="username"
+                }
+            }
+        }
+    })
+</script>
+</html>

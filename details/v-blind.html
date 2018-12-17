@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.js"></script>
+    <title>v-blind与class和style</title>
+    <style>
+        .bkg_red{
+            background:red;
+        }
+        .font_blue{
+            color:blue
+        }
+        .box{
+            width:100px;
+            height:50px;
+            padding:10px;
+            margin:10px;
+            line-height:50px;
+        }
+    </style>
+</head>
+<body id="body">
+    <!--匿名对象-->
+    <div id="simple">
+        <div class="box" v-bind:class={bkg_red:isRed,font_blue:isBlue}>匿名对象</div>    
+    </div>
+    <script>
+        var simple = new Vue({
+            el:"#simple",
+            data:{
+                isRed:true,
+                isBlue:false,
+            }
+        })
+    </script>
+    <!--引用对象名-->
+    <div id="objectName">
+        <div class="box" v-bind:class="classObject">引用对象名</div>    
+    </div>
+    <script>
+        var simple = new Vue({
+            el:"#objectName",
+            data:{
+                classObject:{
+                    bkg_red:true,
+                    font_blue:false,
+                },
+            }
+        })
+    </script>
+    <!--引用计算属性computed-->
+    <div id="computedClass">
+        <div class="box" v-bind:class="computedClass">引用计算属性computed</div>    
+    </div>
+    <script>
+        var computedClass = new Vue({
+            el:"#computedClass",
+            data:{
+                isRed:true,
+                isBlue:false,
+                error:null
+            },
+            computed:{
+                computedClass:function () {
+                    return {
+                        bkg_red:this.isRed && !this.error,
+                        font_blue:this.isBlue && !this.error
+                    }
+                }
+            }
+        })
+    </script>
+    <!--数组语法-->
+    <div id="arrayClass">
+        <div class="box" v-bind:class="[bkgClass,fontClass]">引用计算属性computed</div>    
+    </div>
+    <script>
+        var computedClass = new Vue({
+            el:"#arrayClass",
+            data:{
+                bkgClass:'bkg_red',//数组的键值对赋值，key键为虚拟dom中class的绑定数值，value值为实际dom中的class名
+                fontClass:'font_blue',
+            },
+        })
+    </script>
+    
+</body>
+
+</html>
